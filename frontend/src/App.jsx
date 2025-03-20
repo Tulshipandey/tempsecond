@@ -7,12 +7,11 @@ import Home from './Page/Home'
 const App = () => {
   return (
     <div>
-
-<Routes>
-<Route path="/login" element={<Login/>} />
-<Route path="/register" element={<Register/>} />
-<Route path='/' element={<Home/>} />
-</Routes>
+      <Routes>
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path='/' element={<Home/>} />
+      </Routes>
     </div>
   )
 }

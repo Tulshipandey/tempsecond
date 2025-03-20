@@ -7,8 +7,8 @@ const Navbar = () => {
       <div className='flex items-center gap-15'>
         <div className='text-2xl font-bold text-black '>ParkAndRide</div>
         <div className='flex space-x-4 gap-10 font-semibold text-gray-700'>
-            <Link href='/'>Home</Link>
-            <Link href='/parking'>Parking</Link>
+            <Link to='/'>Home</Link>
+            <Link to='/book'>Parking</Link>
         </div>
         </div>
         <div className='flex space-x-4'>

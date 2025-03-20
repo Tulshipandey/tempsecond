@@ -6,6 +6,10 @@ app.get("/", (req, res) => {
     res.send("Hello World");
 });
 
+ // Middleware
+const errorMiddleware = require("./src/middlewares/error.middleware");
+app.use(errorMiddleware);
+
 
 
 module.exports = app;

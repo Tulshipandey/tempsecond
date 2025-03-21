@@ -87,7 +87,7 @@ router.put("/end/:rideId", async (req, res) => {
     }
 });
 
-// Get user’s active ride
+// Get user's active ride
 router.get("/active/:userId", async (req, res) => {
     try {
         const { userId } = req.params;

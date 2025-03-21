@@ -8,6 +8,7 @@ const socketIo = require("socket.io");
 const authRoutes = require("./routes/authRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const rideRoutes = require("./routes/rideRoutes");
+const parkingRoutes = require("./routes/parkingRoutes");
 
 dotenv.config();
 const app = express();
@@ -21,18 +22,27 @@ const io = socketIo(server, {
 });
 
 // Middleware
-
-app.use(cors({
-    origin: "http://localhost:5173", // ✅ React App Allowed
-    methods: "GET,POST,PUT,DELETE", // ✅ Allowed Methods
-    credentials: true // ✅ Allow Cookies
-  }));
+app.use(cors()); // Enable CORS for frontend
 app.use(express.json()); // Parse JSON request body
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/bookings", bookingRoutes);
+app.use("/api/bookings", bookingRoutes); // This must come before the 404 handler
+
+// 404 handler
+app.use((req, res) => {
+    res.status(404).json({ error: "Route not found" });
+});
+
 app.use("/api/rides", rideRoutes);
+app.use("/api/parkings", parkingRoutes);
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`);
+    next();
+});
+
+
+
 
 // Socket.IO
 io.on("connection", (socket) => {
@@ -52,6 +62,7 @@ mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
+    console.log("Mongoose connection state:", mongoose.connection.readyState);
     console.log("✅ MongoDB connected");
     app.listen(process.env.PORT || 5000, () => {
         console.log("🚀 Server running on port " + (process.env.PORT || 5000));

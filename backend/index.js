@@ -21,7 +21,12 @@ const io = socketIo(server, {
 });
 
 // Middleware
-app.use(cors()); // Enable CORS for frontend
+
+app.use(cors({
+    origin: "http://localhost:5173", // ✅ React App Allowed
+    methods: "GET,POST,PUT,DELETE", // ✅ Allowed Methods
+    credentials: true // ✅ Allow Cookies
+  }));
 app.use(express.json()); // Parse JSON request body
 
 // Routes

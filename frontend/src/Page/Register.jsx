@@ -54,9 +54,7 @@ const UserRegister = () => {
           {/* Email Input */}
           <div>
             <input
-               onChange={(e)=>{
-              
-              }}
+              onChange={(e) => setemail(e.target.value)}
               value={email}
               type="email"
               placeholder="Email"
@@ -66,7 +64,7 @@ const UserRegister = () => {
           {/* Password Input */}
           <div>
             <input
-               
+              onChange={(e) => setpasword(e.target.value)}
               value={password}
               type="password"
               placeholder="Password"
